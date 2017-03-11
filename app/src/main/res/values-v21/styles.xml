@@ -1,0 +1,38 @@
+<resources>
+
+    <!--自定义 加了这个style系统导航栏颜色跟着变动-->
+    <style name="MovieThemeTransNav" parent="MovieTheme">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <!--自定义 加了这个style系统导航栏颜色跟着变动-->
+    <style name="AnimeThemeTransNav" parent="AnimeTheme">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <!--自定义 加了这个style系统导航栏颜色跟着变动-->
+    <style name="TVThemeTransNav" parent="TVTheme">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <!--自定义 加了这个style系统导航栏颜色跟着变动-->
+    <style name="Top250ThemeTransNav" parent="Top250Theme">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <!--自定义 加了这个style系统导航栏颜色跟着变动-->
+    <style name="TagThemeTransNav" parent="TagTheme">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+</resources>

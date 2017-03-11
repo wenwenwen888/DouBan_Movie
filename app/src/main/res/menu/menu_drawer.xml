@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_favorite"
+            android:icon="@drawable/ic_favorite_black_24dp"
+            android:title="@string/favorite" />
+        <item
+            android:id="@+id/nav_gift"
+            android:icon="@drawable/ic_gift_black_24dp"
+            android:title="@string/gift" />
+    </group>
+
+    <!--需要给group设置id，才会出现分割线-->
+    <group
+        android:id="@+id/subitem"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_sun_mode"
+            android:icon="@drawable/ic_sunny_black_24dp"
+            android:title="@string/sun_mode" />
+        <item
+            android:id="@+id/nav_night_mode"
+            android:icon="@drawable/ic_night_black_24dp"
+            android:title="@string/night_mode" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about_black_24dp"
+            android:title="@string/about" />
+    </group>
+
+</menu>

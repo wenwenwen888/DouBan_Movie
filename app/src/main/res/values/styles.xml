@@ -1,0 +1,82 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="MovieTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorMovie</item>
+        <item name="colorPrimaryDark">@color/colorMovie</item>
+        <item name="colorAccent">@color/colorMovie</item>
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+        <!-- 使用自定义样式-->
+        <item name="drawerArrowStyle">@style/AppTheme.MyDrawerArrowStyle</item>
+    </style>
+
+    <style name="AnimeTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorAnime</item>
+        <item name="colorPrimaryDark">@color/colorAnime</item>
+        <item name="colorAccent">@color/colorAnime</item>
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+        <!-- 使用自定义样式-->
+        <item name="drawerArrowStyle">@style/AppTheme.MyDrawerArrowStyle</item>
+    </style>
+
+    <style name="TVTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorTV</item>
+        <item name="colorPrimaryDark">@color/colorTV</item>
+        <item name="colorAccent">@color/colorTV</item>
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+        <!-- 使用自定义样式-->
+        <item name="drawerArrowStyle">@style/AppTheme.MyDrawerArrowStyle</item>
+    </style>
+
+    <style name="Top250Theme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorTop250</item>
+        <item name="colorPrimaryDark">@color/colorTop250</item>
+        <item name="colorAccent">@color/colorTop250</item>
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+        <!-- 使用自定义样式-->
+        <item name="drawerArrowStyle">@style/AppTheme.MyDrawerArrowStyle</item>
+    </style>
+
+    <style name="TagTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorTag</item>
+        <item name="colorPrimaryDark">@color/colorTag</item>
+        <item name="colorAccent">@color/colorTag</item>
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+        <!-- 使用自定义样式-->
+        <item name="drawerArrowStyle">@style/AppTheme.MyDrawerArrowStyle</item>
+    </style>
+
+    <!--自定义 navigation drarwer 的样式-->
+    <style name="AppTheme.MyDrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@color/colorWhite</item>
+    </style>
+
+    <style name="MovieThemeTransNav" parent="MovieTheme"/>
+
+    <style name="AnimeThemeTransNav" parent="AnimeTheme"/>
+
+    <style name="TVThemeTransNav" parent="TVTheme"/>
+
+    <style name="Top250ThemeTransNav" parent="Top250Theme"/>
+
+    <style name="TagThemeTransNav" parent="TagTheme"/>
+
+</resources>

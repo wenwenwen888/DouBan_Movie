@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">小豆瓣</string>
+    <string name="my_name">Wan Chun Nam</string>
+    <string name="my_link">https://github.com/wenwenwen888</string>
+    <string name="movie">电影</string>
+    <string name="anime">动画</string>
+    <string name="tv">电视剧</string>
+    <string name="top250">Top250</string>
+    <string name="tag">分类</string>
+    <string name="favorite">收藏</string>
+    <string name="gift">福利</string>
+    <string name="sun_mode">日间模式</string>
+    <string name="night_mode">夜间模式</string>
+    <string name="about">关于我</string>
+    <string name="search">搜索</string>
+</resources>
