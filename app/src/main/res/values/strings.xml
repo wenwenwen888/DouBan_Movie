@@ -13,4 +13,6 @@
     <string name="night_mode">夜间模式</string>
     <string name="about">关于我</string>
     <string name="search">搜索</string>
+    <string name="exit">退出</string>
+    <string name="search_title">搜索：%s</string>
 </resources>

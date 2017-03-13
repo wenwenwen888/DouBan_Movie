@@ -1,49 +1,32 @@
 package cn.flyexp.douban_movie.fragment;
 
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import cn.flyexp.douban_movie.R;
-import cn.flyexp.douban_movie.assistview.LazyFragment;
-
+import cn.flyexp.douban_movie.base.BaseLazyFragment;
+import cn.flyexp.douban_movie.presenter.TagPresenter;
+import cn.flyexp.douban_movie.view.iview.ITagView;
 
 /**
  * Created by Won on 2016/5/4.
  */
-public class TagFragment extends LazyFragment {
+public class TagFragment extends BaseLazyFragment <ITagView, TagPresenter> implements ITagView{
 
     private static final String TAG = "TagFragment";
 
-    private View view;
-    // 标志位，标志已经初始化完成。
-    private boolean isPrepared;
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.main_tag, container, false);
-
-        initUI();//实例化控件
-        isPrepared = true;
-        lazyLoad();//加载数据
-
-        return view;
+    @Override
+    protected TagPresenter initPresenter() {
+        return new TagPresenter();
     }
-
-    /**
-     * 实例化组件
-     */
-    private void initUI() {
-
-    }
-
-
 
     @Override
-    public void onDestroy() {
-        //销毁时释放资源
-        super.onDestroy();
+    protected int setLayoutId() {
+        return R.layout.main_tag;
+    }
+
+    @Override
+    protected void initView() {
+
     }
 
     /**
@@ -57,4 +40,23 @@ public class TagFragment extends LazyFragment {
         }
     }
 
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showEmpty() {
+
+    }
+
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void showComplete() {
+
+    }
 }

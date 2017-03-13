@@ -1,5 +1,6 @@
-package cn.flyexp.douban_movie;
+package cn.flyexp.douban_movie.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -27,8 +28,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.flyexp.douban_movie.R;
 import cn.flyexp.douban_movie.adapter.FragmentAdapter;
-import cn.flyexp.douban_movie.assistview.LazyFragment;
+import cn.flyexp.douban_movie.base.BaseLazyFragment;
 import cn.flyexp.douban_movie.assistview.NoScrollViewPager;
 import cn.flyexp.douban_movie.fragment.AnimeFragment;
 import cn.flyexp.douban_movie.fragment.MovieFragment;
@@ -54,12 +56,13 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
 
     //Fragment的适配器
     private FragmentAdapter fragmentAdapter;
-    private List<LazyFragment> fragments = new ArrayList<>();
+    private List<BaseLazyFragment> fragments = new ArrayList<>();
 
     private TextView user_link; //导航链接
     private CircleImageView user_icon;  //导航头像
 
     private SearchFragment searchFragment;  //搜索框
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,6 +167,9 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
         toolbar.setBackgroundColor(color);
         navigationview.setBackgroundColor(color);
         user_link.setLinkTextColor(color);
+        intent = new Intent(this, SearchDetailActivity.class);
+        intent.putExtra("theme", styleid);
+        intent.putExtra("color", color);
     }
 
     /**
@@ -171,7 +177,8 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
      */
     @Override
     public void OnSearchClick(String keyword) {
-        Toast.makeText(this, keyword, Toast.LENGTH_SHORT).show();
+        intent.putExtra("keyword", keyword);
+        startActivity(intent);
     }
 
     /**
@@ -197,8 +204,15 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         item.setCheckable(false); //取消点击后的阴影
-        Snackbar.make(toolbar, item.getTitle(), Snackbar.LENGTH_SHORT).show();
-        drawerlayout.closeDrawers();
+        switch (item.getItemId()) {
+            case R.id.nav_exit: //退出
+                System.exit(0);
+                break;
+            default:
+                Snackbar.make(toolbar, item.getTitle(), Snackbar.LENGTH_SHORT).show();
+                drawerlayout.closeDrawers();
+                break;
+        }
         return true;
     }
 

@@ -1,49 +1,32 @@
 package cn.flyexp.douban_movie.fragment;
 
-import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import cn.flyexp.douban_movie.R;
-import cn.flyexp.douban_movie.assistview.LazyFragment;
+import cn.flyexp.douban_movie.base.BaseLazyFragment;
+import cn.flyexp.douban_movie.presenter.Top250Presenter;
+import cn.flyexp.douban_movie.view.iview.ITop250View;
 
 
 /**
  * Created by Won on 2016/5/4.
  */
-public class Top250Fragment extends LazyFragment {
+public class Top250Fragment extends BaseLazyFragment<ITop250View , Top250Presenter> implements ITop250View{
 
     private static final String TAG = "Top250Fragment";
 
-    private View view;
-    // 标志位，标志已经初始化完成。
-    private boolean isPrepared;
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.main_top250, container, false);
-
-        initUI();//实例化控件
-        isPrepared = true;
-        lazyLoad();//加载数据
-
-        return view;
+    @Override
+    protected Top250Presenter initPresenter() {
+        return new Top250Presenter();
     }
-
-    /**
-     * 实例化组件
-     */
-    private void initUI() {
-
-    }
-
-
 
     @Override
-    public void onDestroy() {
-        //销毁时释放资源
-        super.onDestroy();
+    protected int setLayoutId() {
+        return R.layout.main_top250;
+    }
+
+    @Override
+    protected void initView() {
     }
 
     /**
@@ -57,4 +40,23 @@ public class Top250Fragment extends LazyFragment {
         }
     }
 
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void showEmpty() {
+
+    }
+
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void showComplete() {
+
+    }
 }

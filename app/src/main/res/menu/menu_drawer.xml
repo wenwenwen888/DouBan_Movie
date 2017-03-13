@@ -30,4 +30,14 @@
             android:title="@string/about" />
     </group>
 
+    <!--需要给group设置id，才会出现分割线-->
+    <group
+        android:id="@+id/subitem1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/ic_exit_black_24dp"
+            android:title="@string/exit" />
+    </group>
+
 </menu>
