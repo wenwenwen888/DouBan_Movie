@@ -8,6 +8,4 @@ import cn.flyexp.douban_movie.base.IBaseView;
 
 public interface ISearchDetailView extends IBaseView{
 
-    void setTitle(String keyword);
-
 }

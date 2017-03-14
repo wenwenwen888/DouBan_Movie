@@ -2,6 +2,8 @@ package cn.flyexp.douban_movie.base;
 
 import android.content.Context;
 
+import rx.Subscription;
+
 /**
  * Created by Won on 2017/3/12.
  */
@@ -10,6 +12,7 @@ public abstract class BasePresenter<V> {
 
     protected V mView;
     protected Context context;
+    protected Subscription subscription;
 
     /**
      * BaseActivity调用这个方法
@@ -34,6 +37,15 @@ public abstract class BasePresenter<V> {
     /**
      * Presenter销毁时调用
      */
-    abstract protected void onDestory();
+    abstract protected void onDestroy();
+
+    /**
+     * 取消订阅 , 释放内存
+     */
+    protected void unsubscribe() {
+        if (subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
+    }
 
 }

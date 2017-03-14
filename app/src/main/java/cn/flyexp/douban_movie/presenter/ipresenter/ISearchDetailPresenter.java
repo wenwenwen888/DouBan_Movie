@@ -6,6 +6,6 @@ package cn.flyexp.douban_movie.presenter.ipresenter;
 
 public interface ISearchDetailPresenter {
 
-    void search(String keyword);
+    void search(String keyword, boolean isTag, boolean isRefresh);
 
 }

@@ -8,6 +8,4 @@ import cn.flyexp.douban_movie.base.IBaseView;
 
 public interface IMovieView extends IBaseView{
 
-    void showData();
-
 }

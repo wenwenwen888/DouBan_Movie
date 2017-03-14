@@ -1,0 +1,23 @@
+<?xml version="1" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="false">
+        <layer-list>
+            <item android:left="4dip" android:top="4dip">
+                <shape>
+                    <solid android:color="@color/colorTagLight1" />
+                    <corners android:radius="3dip" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item android:state_pressed="true">
+        <layer-list>
+            <item android:left="4dip" android:top="4dip">
+                <shape>
+                    <solid android:color="@color/colorTagLight2" />
+                    <corners android:radius="3dip" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

@@ -6,6 +6,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,13 +31,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.flyexp.douban_movie.R;
 import cn.flyexp.douban_movie.adapter.FragmentAdapter;
-import cn.flyexp.douban_movie.base.BaseLazyFragment;
 import cn.flyexp.douban_movie.assistview.NoScrollViewPager;
-import cn.flyexp.douban_movie.fragment.AnimeFragment;
-import cn.flyexp.douban_movie.fragment.MovieFragment;
-import cn.flyexp.douban_movie.fragment.TVFragment;
-import cn.flyexp.douban_movie.fragment.TagFragment;
-import cn.flyexp.douban_movie.fragment.Top250Fragment;
+import cn.flyexp.douban_movie.view.fragment.AnimeFragment;
+import cn.flyexp.douban_movie.view.fragment.MovieFragment;
+import cn.flyexp.douban_movie.view.fragment.TVFragment;
+import cn.flyexp.douban_movie.view.fragment.TagFragment;
+import cn.flyexp.douban_movie.view.fragment.Top250Fragment;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements OnTabSelectListener, IOnSearchClickListener, View.OnClickListener, Toolbar.OnMenuItemClickListener, NavigationView.OnNavigationItemSelectedListener {
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
 
     //Fragment的适配器
     private FragmentAdapter fragmentAdapter;
-    private List<BaseLazyFragment> fragments = new ArrayList<>();
+    private List<Fragment> fragments = new ArrayList<>();
 
     private TextView user_link; //导航链接
     private CircleImageView user_icon;  //导航头像
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
         fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), fragments);
         //viewpager配置
         viewpager.setNoScroll(true);//viewpager禁止滑动
-        viewpager.setOffscreenPageLimit(4);//默认加载5页
+        viewpager.setOffscreenPageLimit(5);//默认加载5页
         viewpager.setAdapter(fragmentAdapter);
         viewpager.addOnPageChangeListener(new TabOnPageChangeListener());
 

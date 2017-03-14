@@ -15,4 +15,16 @@
     <string name="search">搜索</string>
     <string name="exit">退出</string>
     <string name="search_title">搜索：%s</string>
+    <string name="tag_type">类型 · · · · · ·</string>
+    <string name="tag_country">国家/地区 · · · · · ·</string>
+    <string name="tag_artist">艺术家 · · · · · ·</string>
+    <string name="tag_year">年代 · · · · · ·</string>
+    <string name="error_tips">网络出错，请重试</string>
+    <string name="error_tips2">网络出错，点我重新加载</string>
+    <string name="empty_tips">查询不到数据，换个关键字试试</string>
+    <string name="loading_tips">正在拼命加载中...</string>
+    <string name="no_data_tips">我是有底线(。・`ω´・)</string>
+    <string name="director">导演：%s</string>
+    <string name="cast">主演：%s</string>
+    <string name="average">%s分</string>
 </resources>

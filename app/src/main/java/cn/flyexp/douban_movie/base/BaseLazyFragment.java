@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
-import rx.Subscription;
 
 /**
  * Created by Won on 2016/8/19.
@@ -19,7 +18,6 @@ public abstract class BaseLazyFragment<V, T extends BasePresenter<V>> extends Fr
 
     protected T presenter;
     protected boolean isVisible;
-    protected Subscription subscription;
     protected View view;
     // 标志位，标志已经初始化完成。
     protected boolean isPrepared;
@@ -66,17 +64,8 @@ public abstract class BaseLazyFragment<V, T extends BasePresenter<V>> extends Fr
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unsubscribe();
         presenter.dettach();
-        presenter.onDestory();
+        presenter.onDestroy();
     }
 
-    /**
-     * 取消订阅 , 释放内存
-     */
-    protected void unsubscribe() {
-        if (subscription != null && !subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
-        }
-    }
 }

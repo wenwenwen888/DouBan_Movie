@@ -29,7 +29,7 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected void onDestroy() {
         super.onDestroy();
         presenter.dettach();
-        presenter.onDestory();
+        presenter.onDestroy();
     }
 
     abstract protected T initPresenter();

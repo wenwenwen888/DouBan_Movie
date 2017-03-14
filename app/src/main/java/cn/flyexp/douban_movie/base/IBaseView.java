@@ -1,5 +1,7 @@
 package cn.flyexp.douban_movie.base;
 
+import java.util.ArrayList;
+
 /**
  * Created by Won on 2017/3/12.
  */
@@ -24,6 +26,6 @@ public interface IBaseView {
     /**
      * loadingComplete 方法用于请求数据完成
      */
-    void showComplete();
+    void showComplete(ArrayList<?> models);
 
 }

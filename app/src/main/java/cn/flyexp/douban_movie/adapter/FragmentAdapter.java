@@ -6,15 +6,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-import cn.flyexp.douban_movie.base.BaseLazyFragment;
-
 /**
  * 功能：主页引导栏的三个Fragment页面设置适配器
  */
 public class FragmentAdapter extends FragmentPagerAdapter {
-    private List<BaseLazyFragment> fragments;
+    private List<Fragment> fragments;
 
-    public FragmentAdapter(FragmentManager fm, List<BaseLazyFragment> fragments) {
+    public FragmentAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
     }

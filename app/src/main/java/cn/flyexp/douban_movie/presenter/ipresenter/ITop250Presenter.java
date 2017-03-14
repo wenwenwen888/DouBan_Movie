@@ -6,4 +6,6 @@ package cn.flyexp.douban_movie.presenter.ipresenter;
 
 public interface ITop250Presenter {
 
+    void loadingData();
+
 }

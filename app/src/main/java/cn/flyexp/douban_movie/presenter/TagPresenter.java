@@ -11,7 +11,7 @@ import cn.flyexp.douban_movie.view.iview.ITagView;
 public class TagPresenter extends BasePresenter<ITagView> implements ITagPresenter{
 
     @Override
-    protected void onDestory() {
+    protected void onDestroy() {
 
     }
 }

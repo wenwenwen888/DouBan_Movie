@@ -6,6 +6,6 @@ package cn.flyexp.douban_movie.presenter.ipresenter;
 
 public interface IMoviePresenter {
 
-    void setData();
+    void loadingData();
 
 }
