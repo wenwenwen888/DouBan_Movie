@@ -1,7 +1,9 @@
 package cn.flyexp.douban_movie.net;
 
+import cn.flyexp.douban_movie.model.MovieDetailModel;
 import cn.flyexp.douban_movie.model.MovieModel;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -19,5 +21,8 @@ public interface DouBanApi {
 
     @GET("search")
     Observable<MovieModel> searchTag(@Query("tag") String tag, @Query("start") int start, @Query("count") int count);
+
+    @GET("subject/{id}")
+    Observable<MovieDetailModel> getMovieDetail(@Path("id") String id);
 
 }

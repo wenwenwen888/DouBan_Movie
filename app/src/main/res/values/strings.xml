@@ -13,6 +13,7 @@
     <string name="night_mode">夜间模式</string>
     <string name="about">关于我</string>
     <string name="search">搜索</string>
+    <string name="collection">收藏</string>
     <string name="exit">退出</string>
     <string name="search_title">搜索：%s</string>
     <string name="tag_type">类型 · · · · · ·</string>
@@ -27,4 +28,12 @@
     <string name="director">导演：%s</string>
     <string name="cast">主演：%s</string>
     <string name="average">%s分</string>
+    <string name="detail_year">年份：%s</string>
+    <string name="detail_country">地区：%s</string>
+    <string name="detail_type">类型：%s</string>
+    <string name="detail_director">导演</string>
+    <string name="detail_cast">主演</string>
+    <string name="summary">简介</string>
+    <string name="detail_summary">\u3000\u3000%s</string>
+
 </resources>

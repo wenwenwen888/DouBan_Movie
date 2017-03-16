@@ -1,5 +1,6 @@
 package cn.flyexp.douban_movie.view.activity;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +28,7 @@ import cn.flyexp.douban_movie.model.MovieModel;
 import cn.flyexp.douban_movie.presenter.SearchDetailPresenter;
 import cn.flyexp.douban_movie.view.iview.ISearchDetailView;
 
-public class SearchDetailActivity extends BaseActivity<ISearchDetailView, SearchDetailPresenter> implements ISearchDetailView, IOnSearchClickListener, Toolbar.OnMenuItemClickListener, View.OnClickListener {
+public class SearchDetailActivity extends BaseActivity<ISearchDetailView, SearchDetailPresenter> implements ISearchDetailView, IOnSearchClickListener, Toolbar.OnMenuItemClickListener, View.OnClickListener, MovieAdapter.IOnItemClickListener {
 
     private static final String TAG = "SearchDetailActivity";
 
@@ -84,6 +85,7 @@ public class SearchDetailActivity extends BaseActivity<ISearchDetailView, Search
         srl.setColorSchemeColors(getIntent().getIntExtra("color", getResources().getColor(R.color.colorMovie)));
         //适配器
         searchAdapter = new MovieAdapter(movieModelBeans);
+        searchAdapter.setOnItemClickListener(this);
         searchWrapperAdapter = new HeaderAndFooterWrapper(searchAdapter);
         //添加footerView
         View footerView = LayoutInflater.from(this).inflate(R.layout.footerview, null);
@@ -205,5 +207,16 @@ public class SearchDetailActivity extends BaseActivity<ISearchDetailView, Search
     public boolean onMenuItemClick(MenuItem item) {
         searchFragment.show(getSupportFragmentManager(), SearchFragment.TAG);
         return true;
+    }
+
+    @Override
+    public void onItemClick(String id, String img_url, String title) {
+        Intent intent = new Intent(this, MovieDetailActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("theme", getIntent().getIntExtra("theme", R.style.MovieThemeTransNav));
+        intent.putExtra("img_url", img_url);
+        intent.putExtra("title", title);
+        intent.putExtra("color", getIntent().getIntExtra("color", getResources().getColor(R.color.colorMovie)));
+        startActivity(intent);
     }
 }

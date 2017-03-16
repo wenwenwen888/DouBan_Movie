@@ -10,7 +10,7 @@ import cn.flyexp.douban_movie.R;
  * Created by Won on 2017/3/11.
  */
 
-public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity implements IBaseView {
+public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
 
     protected T presenter;
 

@@ -1,5 +1,6 @@
 package cn.flyexp.douban_movie.view.fragment;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,13 +20,14 @@ import cn.flyexp.douban_movie.adapter.MovieAdapter;
 import cn.flyexp.douban_movie.base.BaseLazyFragment;
 import cn.flyexp.douban_movie.model.MovieModel;
 import cn.flyexp.douban_movie.presenter.MoviePresenter;
+import cn.flyexp.douban_movie.view.activity.MovieDetailActivity;
 import cn.flyexp.douban_movie.view.iview.IMovieView;
 
 
 /**
  * Created by Won on 2016/5/4.
  */
-public class MovieFragment extends BaseLazyFragment<IMovieView, MoviePresenter> implements IMovieView, View.OnClickListener {
+public class MovieFragment extends BaseLazyFragment<IMovieView, MoviePresenter> implements IMovieView, View.OnClickListener, MovieAdapter.IOnItemClickListener {
 
     private static final String TAG = "MovieFragment";
 
@@ -76,6 +78,8 @@ public class MovieFragment extends BaseLazyFragment<IMovieView, MoviePresenter> 
         rv.addOnScrollListener(mOnScrollListener);
         //监听点击提示文本
         tvTip.setOnClickListener(this);
+        //item点击事件
+        movieAdapter.setOnItemClickListener(this);
     }
 
     /**
@@ -155,5 +159,16 @@ public class MovieFragment extends BaseLazyFragment<IMovieView, MoviePresenter> 
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(String id, String img_url, String title) {
+        Intent intent = new Intent(getContext(), MovieDetailActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("theme", R.style.MovieThemeTransNav);
+        intent.putExtra("img_url", img_url);
+        intent.putExtra("title", title);
+        intent.putExtra("color", getResources().getColor(R.color.colorMovie));
+        startActivity(intent);
     }
 }

@@ -1,5 +1,6 @@
 package cn.flyexp.douban_movie.view.fragment;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,13 +20,14 @@ import cn.flyexp.douban_movie.adapter.MovieAdapter;
 import cn.flyexp.douban_movie.base.BaseLazyFragment;
 import cn.flyexp.douban_movie.model.MovieModel;
 import cn.flyexp.douban_movie.presenter.TVPresenter;
+import cn.flyexp.douban_movie.view.activity.MovieDetailActivity;
 import cn.flyexp.douban_movie.view.iview.ITVView;
 
 
 /**
  * Created by Won on 2016/5/4.
  */
-public class TVFragment extends BaseLazyFragment<ITVView , TVPresenter> implements ITVView, View.OnClickListener {
+public class TVFragment extends BaseLazyFragment<ITVView , TVPresenter> implements ITVView, View.OnClickListener, MovieAdapter.IOnItemClickListener {
 
     private static final String TAG = "TVFragment";
 
@@ -64,6 +66,7 @@ public class TVFragment extends BaseLazyFragment<ITVView , TVPresenter> implemen
         srl.setColorSchemeResources(R.color.colorTV);
         //适配器
         tvAdapter = new MovieAdapter(movieModelBeans);
+        tvAdapter.setOnItemClickListener(this);
         tvWrapperAdapter = new HeaderAndFooterWrapper(tvAdapter);
         //添加footerView
         View footerView = LayoutInflater.from(getContext()).inflate(R.layout.footerview, null);
@@ -147,5 +150,16 @@ public class TVFragment extends BaseLazyFragment<ITVView , TVPresenter> implemen
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(String id, String img_url, String title) {
+        Intent intent = new Intent(getContext(), MovieDetailActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("theme", R.style.TVThemeTransNav);
+        intent.putExtra("img_url", img_url);
+        intent.putExtra("title", title);
+        intent.putExtra("color", getResources().getColor(R.color.colorTV));
+        startActivity(intent);
     }
 }

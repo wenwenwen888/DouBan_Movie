@@ -1,5 +1,6 @@
 package cn.flyexp.douban_movie.view.fragment;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,13 +20,14 @@ import cn.flyexp.douban_movie.adapter.MovieAdapter;
 import cn.flyexp.douban_movie.base.BaseLazyFragment;
 import cn.flyexp.douban_movie.model.MovieModel;
 import cn.flyexp.douban_movie.presenter.Top250Presenter;
+import cn.flyexp.douban_movie.view.activity.MovieDetailActivity;
 import cn.flyexp.douban_movie.view.iview.ITop250View;
 
 
 /**
  * Created by Won on 2016/5/4.
  */
-public class Top250Fragment extends BaseLazyFragment<ITop250View , Top250Presenter> implements ITop250View, View.OnClickListener {
+public class Top250Fragment extends BaseLazyFragment<ITop250View , Top250Presenter> implements ITop250View, View.OnClickListener, MovieAdapter.IOnItemClickListener {
 
     private static final String TAG = "Top250Fragment";
 
@@ -64,6 +66,7 @@ public class Top250Fragment extends BaseLazyFragment<ITop250View , Top250Present
         srl.setColorSchemeResources(R.color.colorTop250);
         //适配器
         top250Adapter = new MovieAdapter(movieModelBeans);
+        top250Adapter.setOnItemClickListener(this);
         top250WrapperAdapter = new HeaderAndFooterWrapper(top250Adapter);
         //添加footerView
         View footerView = LayoutInflater.from(getContext()).inflate(R.layout.footerview, null);
@@ -147,5 +150,16 @@ public class Top250Fragment extends BaseLazyFragment<ITop250View , Top250Present
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(String id, String img_url, String title) {
+        Intent intent = new Intent(getContext(), MovieDetailActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("theme", R.style.Top250ThemeTransNav);
+        intent.putExtra("img_url", img_url);
+        intent.putExtra("title", title);
+        intent.putExtra("color", getResources().getColor(R.color.colorTop250));
+        startActivity(intent);
     }
 }

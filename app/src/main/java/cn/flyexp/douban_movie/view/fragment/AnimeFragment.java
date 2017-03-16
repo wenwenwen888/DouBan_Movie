@@ -1,5 +1,6 @@
 package cn.flyexp.douban_movie.view.fragment;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,13 +20,14 @@ import cn.flyexp.douban_movie.adapter.MovieAdapter;
 import cn.flyexp.douban_movie.base.BaseLazyFragment;
 import cn.flyexp.douban_movie.model.MovieModel;
 import cn.flyexp.douban_movie.presenter.AnimePresenter;
+import cn.flyexp.douban_movie.view.activity.MovieDetailActivity;
 import cn.flyexp.douban_movie.view.iview.IAnimeView;
 
 
 /**
  * Created by Won on 2016/5/4.
  */
-public class AnimeFragment extends BaseLazyFragment <IAnimeView, AnimePresenter> implements IAnimeView, View.OnClickListener {
+public class AnimeFragment extends BaseLazyFragment <IAnimeView, AnimePresenter> implements IAnimeView, View.OnClickListener, MovieAdapter.IOnItemClickListener {
 
     private static final String TAG = "AnimeFragment";
 
@@ -65,6 +67,7 @@ public class AnimeFragment extends BaseLazyFragment <IAnimeView, AnimePresenter>
         //适配器
         animeAdapter = new MovieAdapter(movieModelBeans);
         animeWrapperAdapter = new HeaderAndFooterWrapper(animeAdapter);
+        animeAdapter.setOnItemClickListener(this);
         //添加footerView
         View footerView = LayoutInflater.from(getContext()).inflate(R.layout.footerview, null);
         animeFooterViewInfo = (TextView) footerView.findViewById(R.id.footerview_info);
@@ -147,5 +150,16 @@ public class AnimeFragment extends BaseLazyFragment <IAnimeView, AnimePresenter>
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(String id, String img_url, String title) {
+        Intent intent = new Intent(getContext(), MovieDetailActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("theme", R.style.AnimeThemeTransNav);
+        intent.putExtra("img_url", img_url);
+        intent.putExtra("title", title);
+        intent.putExtra("color", getResources().getColor(R.color.colorAnime));
+        startActivity(intent);
     }
 }

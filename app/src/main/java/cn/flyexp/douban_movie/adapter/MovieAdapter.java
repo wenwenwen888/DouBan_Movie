@@ -41,7 +41,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Context context = holder.itemView.getContext();
-        MovieModel.SubjectsBean subjectsBean = movieModel.get(position);
+        final MovieModel.SubjectsBean subjectsBean = movieModel.get(position);
         //加载图片
         Glide.with(context).load(subjectsBean.getImages().getMedium()).into(holder.imgMovie);
         //设置title
@@ -70,7 +70,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
         holder.tvMovieCast.setText(String.format(context.getResources().getString(R.string.cast), casts));
         //设置分数
         holder.tvMovieAverage.setText(String.format(context.getResources().getString(R.string.average), "" + subjectsBean.getRating().getAverage()));
-
+        //点击回调
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOnItemClickListener.onItemClick(subjectsBean.getId(), subjectsBean.getImages().getLarge(), subjectsBean.getTitle());
+            }
+        });
     }
 
     @Override
@@ -95,6 +101,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    private IOnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(IOnItemClickListener mOnItemClickListener) {
+        this.mOnItemClickListener = mOnItemClickListener;
+    }
+
+    public interface IOnItemClickListener {
+        void onItemClick(String id, String img_url, String title);
     }
 
 }
