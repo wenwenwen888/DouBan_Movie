@@ -1,5 +1,6 @@
 package cn.flyexp.douban_movie.net;
 
+import cn.flyexp.douban_movie.model.CelebrityDetailModel;
 import cn.flyexp.douban_movie.model.MovieDetailModel;
 import cn.flyexp.douban_movie.model.MovieModel;
 import retrofit2.http.GET;
@@ -24,5 +25,8 @@ public interface DouBanApi {
 
     @GET("subject/{id}")
     Observable<MovieDetailModel> getMovieDetail(@Path("id") String id);
+
+    @GET("celebrity/{id}")
+    Observable<CelebrityDetailModel> getCelebrityDetail(@Path("id") String id);
 
 }

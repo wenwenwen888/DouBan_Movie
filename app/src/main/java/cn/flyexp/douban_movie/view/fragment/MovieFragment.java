@@ -27,7 +27,7 @@ import cn.flyexp.douban_movie.view.iview.IMovieView;
 /**
  * Created by Won on 2016/5/4.
  */
-public class MovieFragment extends BaseLazyFragment<IMovieView, MoviePresenter> implements IMovieView, View.OnClickListener, MovieAdapter.IOnItemClickListener {
+public class MovieFragment extends BaseLazyFragment<IMovieView, MoviePresenter> implements IMovieView, View.OnClickListener, MovieAdapter.IOnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = "MovieFragment";
 
@@ -62,8 +62,8 @@ public class MovieFragment extends BaseLazyFragment<IMovieView, MoviePresenter> 
     @Override
     protected void initView() {
         //配置SwipeRefreshLayout
-        srl.setEnabled(false);
         srl.setColorSchemeResources(R.color.colorMovie);
+        srl.setOnRefreshListener(this);
         //适配器
         movieAdapter = new MovieAdapter(movieModelBeans);
         movieWrapperAdapter = new HeaderAndFooterWrapper(movieAdapter);
@@ -91,7 +91,7 @@ public class MovieFragment extends BaseLazyFragment<IMovieView, MoviePresenter> 
         if (isFirst & isPrepared && isVisible) {
             isFirst = false;
             //加载数据
-            presenter.loadingData();
+            presenter.loadingData(true);
         }
     }
 
@@ -104,18 +104,19 @@ public class MovieFragment extends BaseLazyFragment<IMovieView, MoviePresenter> 
             if (!recyclerView.canScrollVertically(1) && dy != 0 && !srl.isRefreshing()) {// 手指不能向上滑动了并且不在加载状态
                 movieFooterViewInfo.setText(getText(R.string.loading_tips));
                 srl.setRefreshing(true);
-                presenter.loadingData();//刷新
+                presenter.loadingData(false);//刷新
             }
         }
     };
 
-//    /**
-//     * 下拉更新
-//     */
-//    @Override
-//    public void onRefresh() {
-//        Log.e(TAG, "onRefresh");
-//    }
+    /**
+     * 下拉更新
+     */
+    @Override
+    public void onRefresh() {
+        movieModelBeans.clear();
+        presenter.loadingData(true);//下拉刷新
+    }
 
     @Override
     public void showLoading() {
@@ -154,7 +155,7 @@ public class MovieFragment extends BaseLazyFragment<IMovieView, MoviePresenter> 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_tip_movie:
-                presenter.loadingData();//重新加载
+                presenter.loadingData(true);//重新加载
                 break;
             default:
                 break;

@@ -3,9 +3,11 @@ package cn.flyexp.douban_movie.presenter;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import cn.flyexp.douban_movie.base.BasePresenter;
 import cn.flyexp.douban_movie.model.MovieModel;
+import cn.flyexp.douban_movie.model.TagData;
 import cn.flyexp.douban_movie.net.NetWork;
 import cn.flyexp.douban_movie.presenter.ipresenter.IMoviePresenter;
 import cn.flyexp.douban_movie.view.iview.IMovieView;
@@ -22,6 +24,8 @@ public class MoviePresenter extends BasePresenter<IMovieView> implements IMovieP
     private static final String TAG = "MoviePresenter";
 
     private int start = 0;
+    //关键字
+    private String artist;
 
     private Observer<MovieModel> observer = new Observer<MovieModel>() {
         @Override
@@ -48,10 +52,14 @@ public class MoviePresenter extends BasePresenter<IMovieView> implements IMovieP
     };
 
     @Override
-    public void loadingData() {
+    public void loadingData(boolean isRefresh) {
         mView.showLoading();
+        if (isRefresh) {
+            artist = TagData.artists[new Random().nextInt(37)];
+            start = 0;
+        }
         subscription = NetWork.getDouBanApi()
-                .searchTag("周星驰", start, 20)
+                .searchTag(artist, start, 20)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);

@@ -1,7 +1,8 @@
 package cn.flyexp.douban_movie.base;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
+import com.aitangba.swipeback.SwipeBackActivity;
 
 import butterknife.ButterKnife;
 import cn.flyexp.douban_movie.R;
@@ -10,7 +11,7 @@ import cn.flyexp.douban_movie.R;
  * Created by Won on 2017/3/11.
  */
 
-public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
+public abstract class BaseActivity<V, T extends BasePresenter<V>> extends SwipeBackActivity {
 
     protected T presenter;
 

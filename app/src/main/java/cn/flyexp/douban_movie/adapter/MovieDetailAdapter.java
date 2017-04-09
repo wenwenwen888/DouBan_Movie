@@ -47,7 +47,7 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mOnItemClickListener.onItemClick(ids.get(holder.getAdapterPosition()));
+                mOnItemClickListener.onItemClick(ids.get(holder.getAdapterPosition()) , names.get(holder.getAdapterPosition()));
             }
         });
     }
@@ -77,7 +77,7 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
     }
 
     public interface IOnItemClickListener {
-        void onItemClick(String id);
+        void onItemClick(String id , String name);
     }
 
 }

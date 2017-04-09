@@ -51,7 +51,6 @@
             android:scrollbars="none"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
             <LinearLayout
                 android:id="@+id/ll_movie_detail"
                 android:layout_width="match_parent"

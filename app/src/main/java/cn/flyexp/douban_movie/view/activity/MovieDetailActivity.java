@@ -1,5 +1,6 @@
 package cn.flyexp.douban_movie.view.activity;
 
+import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import cn.flyexp.douban_movie.R;
 import cn.flyexp.douban_movie.adapter.MovieDetailAdapter;
 import cn.flyexp.douban_movie.base.BaseActivity;
@@ -64,7 +66,7 @@ public class MovieDetailActivity extends BaseActivity<IMovieDetailView, MovieDet
 
     @Override
     protected void initView() {
-        //加载头像
+        //加载图片
         Glide.with(this).load(getIntent().getStringExtra("img_url")).into(ivMovieDetail);
         //设置标题
         collapsingMovieDetail.setTitle(getIntent().getStringExtra("title"));
@@ -83,6 +85,13 @@ public class MovieDetailActivity extends BaseActivity<IMovieDetailView, MovieDet
         initRecyclerView(rvMovieDetailCast);
         //加载数据
         presenter.loadingData(getIntent().getStringExtra("id"));
+    }
+
+    @OnClick(R.id.iv_movie_detail)
+    public void onViewClicked() {
+        Intent intent = new Intent(this, PhotoActivity.class);
+        intent.putExtra("img_url", getIntent().getStringExtra("img_url"));
+        startActivity(intent);
     }
 
     /**
@@ -196,8 +205,13 @@ public class MovieDetailActivity extends BaseActivity<IMovieDetailView, MovieDet
     }
 
     @Override
-    public void onItemClick(String id) {
-        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+    public void onItemClick(String id, String name) {
+        Intent intent = new Intent(this, CelebrityDetailActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("theme", getIntent().getIntExtra("theme", R.style.MovieThemeTransNav));
+        intent.putExtra("title", name);
+        intent.putExtra("color", getIntent().getIntExtra("color", getResources().getColor(R.color.colorMovie)));
+        startActivity(intent);
     }
 
 }
