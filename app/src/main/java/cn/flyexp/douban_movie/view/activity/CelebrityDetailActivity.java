@@ -22,7 +22,7 @@ import cn.flyexp.douban_movie.adapter.MovieAdapter;
 import cn.flyexp.douban_movie.assistview.MyRecyclerView;
 import cn.flyexp.douban_movie.base.BaseActivity;
 import cn.flyexp.douban_movie.model.CelebrityDetailModel;
-import cn.flyexp.douban_movie.model.MovieModel;
+import cn.flyexp.douban_movie.model.MovieSubjectsModel;
 import cn.flyexp.douban_movie.presenter.CelebrityDetailPresenter;
 import cn.flyexp.douban_movie.view.iview.ICelebrityDetailView;
 
@@ -50,6 +50,8 @@ public class CelebrityDetailActivity extends BaseActivity<ICelebrityDetailView, 
     LinearLayout llCelebrityDetail;
 
     private String avatars_large;
+    //电影条目列表
+    private ArrayList<MovieSubjectsModel> movieModelBeans = new ArrayList<>();
 
     @Override
     protected CelebrityDetailPresenter initPresenter() {
@@ -134,9 +136,8 @@ public class CelebrityDetailActivity extends BaseActivity<ICelebrityDetailView, 
         tvCelebrityPlace.setText(celebrityDetailModel.getBorn_place());
         //角色
         ArrayList<String> roles = new ArrayList<>();
-        ArrayList<MovieModel.SubjectsBean> subjectsBeans = new ArrayList<>();
         for (CelebrityDetailModel.WorksBean worksBean : celebrityDetailModel.getWorks()) {
-            subjectsBeans.add(worksBean.getSubject());
+            movieModelBeans.add(worksBean.getSubject());
             for (String role : worksBean.getRoles()) {
                 if (!roles.contains(role)) {
                     roles.add(role);
@@ -153,7 +154,7 @@ public class CelebrityDetailActivity extends BaseActivity<ICelebrityDetailView, 
         }
         tvCelebrityRoles.setText(role);
         //作品
-        MovieAdapter worksAdapter = new MovieAdapter(subjectsBeans);
+        MovieAdapter worksAdapter = new MovieAdapter(movieModelBeans);
         rvWorks.setAdapter(worksAdapter);
         worksAdapter.setOnItemClickListener(this);
         //更多作品
@@ -166,12 +167,13 @@ public class CelebrityDetailActivity extends BaseActivity<ICelebrityDetailView, 
     }
 
     @Override
-    public void onItemClick(String id, String img_url, String title) {
+    public void onItemClick(int position, String id, String img_url, String title) {
         Intent intent = new Intent(this, MovieDetailActivity.class);
         intent.putExtra("id", id);
         intent.putExtra("theme", getIntent().getIntExtra("theme", R.style.MovieThemeTransNav));
         intent.putExtra("img_url", img_url);
         intent.putExtra("title", title);
+        intent.putExtra("movieSubject", movieModelBeans.get(position));
         intent.putExtra("color", getIntent().getIntExtra("color", getResources().getColor(R.color.colorMovie)));
         startActivity(intent);
     }

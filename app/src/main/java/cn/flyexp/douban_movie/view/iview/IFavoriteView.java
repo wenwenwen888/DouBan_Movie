@@ -1,13 +1,14 @@
 package cn.flyexp.douban_movie.view.iview;
 
-import cn.flyexp.douban_movie.model.MovieDetailModel;
+import java.util.List;
+
+import cn.flyexp.douban_movie.model.MovieSubjectsModel;
 
 /**
- * Created by Won on 2017/3/15.
+ * Created by Won on 2017/3/12.
  */
 
-public interface IMovieDetailView {
-
+public interface IFavoriteView {
     /**
      * showLoading 方法主要用于页面请求数据时显示加载状态
      */
@@ -19,13 +20,7 @@ public interface IMovieDetailView {
     void showEmpty();
 
     /**
-     * showError 方法用于请求数据出错
-     */
-    void showError(boolean is404);
-
-    /**
      * loadingComplete 方法用于请求数据完成
      */
-    void showComplete(MovieDetailModel movieDetailModel);
-
+    void showComplete(List<MovieSubjectsModel> movieSubjectsModels);
 }

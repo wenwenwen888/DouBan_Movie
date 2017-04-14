@@ -18,7 +18,7 @@ import butterknife.BindView;
 import cn.flyexp.douban_movie.R;
 import cn.flyexp.douban_movie.adapter.MovieAdapter;
 import cn.flyexp.douban_movie.base.BaseLazyFragment;
-import cn.flyexp.douban_movie.model.MovieModel;
+import cn.flyexp.douban_movie.model.MovieSubjectsModel;
 import cn.flyexp.douban_movie.presenter.AnimePresenter;
 import cn.flyexp.douban_movie.view.activity.MovieDetailActivity;
 import cn.flyexp.douban_movie.view.iview.IAnimeView;
@@ -27,7 +27,7 @@ import cn.flyexp.douban_movie.view.iview.IAnimeView;
 /**
  * Created by Won on 2016/5/4.
  */
-public class AnimeFragment extends BaseLazyFragment <IAnimeView, AnimePresenter> implements IAnimeView, View.OnClickListener, MovieAdapter.IOnItemClickListener {
+public class AnimeFragment extends BaseLazyFragment<IAnimeView, AnimePresenter> implements IAnimeView, View.OnClickListener, MovieAdapter.IOnItemClickListener {
 
     private static final String TAG = "AnimeFragment";
 
@@ -41,14 +41,14 @@ public class AnimeFragment extends BaseLazyFragment <IAnimeView, AnimePresenter>
     //判断是否第一次显示
     private boolean isFirst = true;
     //电影条目列表
-    private ArrayList<MovieModel.SubjectsBean> movieModelBeans = new ArrayList<>();
+    private ArrayList<MovieSubjectsModel> movieModelBeans = new ArrayList<>();
     //添加FooterView的适配器
     private HeaderAndFooterWrapper animeWrapperAdapter;
     //适配器
     private MovieAdapter animeAdapter;
     //footerView文字显示
     private TextView animeFooterViewInfo;
-    
+
     @Override
     protected AnimePresenter initPresenter() {
         return new AnimePresenter();
@@ -137,7 +137,7 @@ public class AnimeFragment extends BaseLazyFragment <IAnimeView, AnimePresenter>
     public void showComplete(ArrayList<?> modelBeans) {
         tvTip.setVisibility(View.GONE);
         srl.setRefreshing(false);
-        movieModelBeans.addAll((Collection<? extends MovieModel.SubjectsBean>) modelBeans);
+        movieModelBeans.addAll((Collection<? extends MovieSubjectsModel>) modelBeans);
         animeWrapperAdapter.notifyDataSetChanged();
     }
 
@@ -153,12 +153,13 @@ public class AnimeFragment extends BaseLazyFragment <IAnimeView, AnimePresenter>
     }
 
     @Override
-    public void onItemClick(String id, String img_url, String title) {
+    public void onItemClick(int position, String id, String img_url, String title) {
         Intent intent = new Intent(getContext(), MovieDetailActivity.class);
         intent.putExtra("id", id);
         intent.putExtra("theme", R.style.AnimeThemeTransNav);
         intent.putExtra("img_url", img_url);
         intent.putExtra("title", title);
+        intent.putExtra("movieSubject", movieModelBeans.get(position));
         intent.putExtra("color", getResources().getColor(R.color.colorAnime));
         startActivity(intent);
     }

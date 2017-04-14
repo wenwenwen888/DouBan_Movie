@@ -24,7 +24,7 @@ import butterknife.BindView;
 import cn.flyexp.douban_movie.R;
 import cn.flyexp.douban_movie.adapter.MovieAdapter;
 import cn.flyexp.douban_movie.base.BaseActivity;
-import cn.flyexp.douban_movie.model.MovieModel;
+import cn.flyexp.douban_movie.model.MovieSubjectsModel;
 import cn.flyexp.douban_movie.presenter.SearchDetailPresenter;
 import cn.flyexp.douban_movie.view.iview.ISearchDetailView;
 
@@ -46,7 +46,7 @@ public class SearchDetailActivity extends BaseActivity<ISearchDetailView, Search
     //关键字
     String keyword = "";
     //电影条目列表
-    private ArrayList<MovieModel.SubjectsBean> movieModelBeans = new ArrayList<>();
+    private ArrayList<MovieSubjectsModel> movieModelBeans = new ArrayList<>();
     //添加FooterView的适配器
     private HeaderAndFooterWrapper searchWrapperAdapter;
     //适配器
@@ -167,7 +167,7 @@ public class SearchDetailActivity extends BaseActivity<ISearchDetailView, Search
     public void showComplete(ArrayList<?> modelBeans) {
         tvTip.setVisibility(View.GONE);
         srl.setRefreshing(false);
-        movieModelBeans.addAll((Collection<? extends MovieModel.SubjectsBean>) modelBeans);
+        movieModelBeans.addAll((Collection<? extends MovieSubjectsModel>) modelBeans);
         searchWrapperAdapter.notifyDataSetChanged();
         if (searchFooterViewInfo.getVisibility() == View.GONE)
             searchFooterViewInfo.setVisibility(View.VISIBLE);
@@ -210,12 +210,13 @@ public class SearchDetailActivity extends BaseActivity<ISearchDetailView, Search
     }
 
     @Override
-    public void onItemClick(String id, String img_url, String title) {
+    public void onItemClick(int position, String id, String img_url, String title) {
         Intent intent = new Intent(this, MovieDetailActivity.class);
         intent.putExtra("id", id);
         intent.putExtra("theme", getIntent().getIntExtra("theme", R.style.MovieThemeTransNav));
         intent.putExtra("img_url", img_url);
         intent.putExtra("title", title);
+        intent.putExtra("movieSubject", movieModelBeans.get(position));
         intent.putExtra("color", getIntent().getIntExtra("color", getResources().getColor(R.color.colorMovie)));
         startActivity(intent);
     }

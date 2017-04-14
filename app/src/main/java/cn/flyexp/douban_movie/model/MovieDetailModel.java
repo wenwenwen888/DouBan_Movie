@@ -1,12 +1,17 @@
 package cn.flyexp.douban_movie.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import org.litepal.crud.DataSupport;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Won on 2017/3/15.
  */
 
-public class MovieDetailModel {
+public class MovieDetailModel extends DataSupport {
 
 
     /**
@@ -46,7 +51,8 @@ public class MovieDetailModel {
     private String year;
     private ImagesBean images;
     private String alt;
-    private String id;
+    @SerializedName("id")
+    private String movie_id;
     private String mobile_url;
     private String title;
     private String share_url;
@@ -59,9 +65,10 @@ public class MovieDetailModel {
     private int ratings_count;
     private List<String> countries;
     private List<String> genres;
-    private List<CastsBean> casts;
-    private List<DirectorsBean> directors;
+    private List<CastsBean> casts = new ArrayList<>();
+    private List<DirectorsBean> directors = new ArrayList<>();
     private List<String> aka;
+
 
     public RatingBean getRating() {
         return rating;
@@ -119,12 +126,12 @@ public class MovieDetailModel {
         this.alt = alt;
     }
 
-    public String getId() {
-        return id;
+    public String getMovie_id() {
+        return movie_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setMovie_id(String movie_id) {
+        this.movie_id = movie_id;
     }
 
     public String getMobile_url() {
@@ -247,7 +254,7 @@ public class MovieDetailModel {
         this.aka = aka;
     }
 
-    public static class RatingBean {
+    public static class RatingBean extends DataSupport{
         /**
          * max : 10
          * average : 8.4
@@ -293,7 +300,7 @@ public class MovieDetailModel {
         }
     }
 
-    public static class ImagesBean {
+    public static class ImagesBean extends DataSupport{
         /**
          * small : https://img3.doubanio.com/view/movie_poster_cover/ipst/public/p1043597424.jpg
          * large : https://img3.doubanio.com/view/movie_poster_cover/lpst/public/p1043597424.jpg
@@ -329,7 +336,7 @@ public class MovieDetailModel {
         }
     }
 
-    public static class CastsBean {
+    public static class CastsBean extends DataSupport{
         /**
          * alt : https://movie.douban.com/celebrity/1048026/
          * avatars : {"small":"https://img3.doubanio.com/img/celebrity/small/47421.jpg","large":"https://img3.doubanio.com/img/celebrity/large/47421.jpg","medium":"https://img3.doubanio.com/img/celebrity/medium/47421.jpg"}
@@ -340,7 +347,17 @@ public class MovieDetailModel {
         private String alt;
         private AvatarsBean avatars;
         private String name;
-        private String id;
+        @SerializedName("id")
+        private String cast_id;
+        private MovieDetailModel movieDetailModel;
+
+        public MovieDetailModel getMovieDetailModel() {
+            return movieDetailModel;
+        }
+
+        public void setMovieDetailModel(MovieDetailModel movieDetailModel) {
+            this.movieDetailModel = movieDetailModel;
+        }
 
         public String getAlt() {
             return alt;
@@ -367,14 +384,14 @@ public class MovieDetailModel {
         }
 
         public String getId() {
-            return id;
+            return cast_id;
         }
 
         public void setId(String id) {
-            this.id = id;
+            this.cast_id = id;
         }
 
-        public static class AvatarsBean {
+        public static class AvatarsBean extends DataSupport{
             /**
              * small : https://img3.doubanio.com/img/celebrity/small/47421.jpg
              * large : https://img3.doubanio.com/img/celebrity/large/47421.jpg
@@ -411,7 +428,7 @@ public class MovieDetailModel {
         }
     }
 
-    public static class DirectorsBean {
+    public static class DirectorsBean extends DataSupport{
         /**
          * alt : https://movie.douban.com/celebrity/1048026/
          * avatars : {"small":"https://img3.doubanio.com/img/celebrity/small/47421.jpg","large":"https://img3.doubanio.com/img/celebrity/large/47421.jpg","medium":"https://img3.doubanio.com/img/celebrity/medium/47421.jpg"}
@@ -422,7 +439,17 @@ public class MovieDetailModel {
         private String alt;
         private AvatarsBeanX avatars;
         private String name;
-        private String id;
+        @SerializedName("id")
+        private String director_id;
+        private MovieDetailModel movieDetailModel;
+
+        public MovieDetailModel getMovieDetailModel() {
+            return movieDetailModel;
+        }
+
+        public void setMovieDetailModel(MovieDetailModel movieDetailModel) {
+            this.movieDetailModel = movieDetailModel;
+        }
 
         public String getAlt() {
             return alt;
@@ -449,14 +476,14 @@ public class MovieDetailModel {
         }
 
         public String getId() {
-            return id;
+            return director_id;
         }
 
         public void setId(String id) {
-            this.id = id;
+            this.director_id = id;
         }
 
-        public static class AvatarsBeanX {
+        public static class AvatarsBeanX extends DataSupport{
             /**
              * small : https://img3.doubanio.com/img/celebrity/small/47421.jpg
              * large : https://img3.doubanio.com/img/celebrity/large/47421.jpg

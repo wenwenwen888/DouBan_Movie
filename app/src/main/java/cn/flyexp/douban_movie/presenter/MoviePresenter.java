@@ -55,7 +55,7 @@ public class MoviePresenter extends BasePresenter<IMovieView> implements IMovieP
     public void loadingData(boolean isRefresh) {
         mView.showLoading();
         if (isRefresh) {
-            artist = TagData.artists[new Random().nextInt(37)];
+            artist = TagData.artists[new Random().nextInt(36)];
             start = 0;
         }
         subscription = NetWork.getDouBanApi()

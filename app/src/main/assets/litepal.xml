@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="movie_db" />
+
+    <version value="1" />
+
+    <list>
+        <mapping class="cn.flyexp.douban_movie.model.MovieSubjectsModel" />
+        <mapping class="cn.flyexp.douban_movie.model.MovieSubjectsModel$RatingBean" />
+        <mapping class="cn.flyexp.douban_movie.model.MovieSubjectsModel$ImagesBean" />
+        <mapping class="cn.flyexp.douban_movie.model.MovieSubjectsModel$CastsBean" />
+        <mapping class="cn.flyexp.douban_movie.model.MovieSubjectsModel$CastsBean$AvatarsBean" />
+        <mapping class="cn.flyexp.douban_movie.model.MovieSubjectsModel$DirectorsBean" />
+        <mapping class="cn.flyexp.douban_movie.model.MovieSubjectsModel$DirectorsBean$AvatarsBeanX" />
+        <mapping class="cn.flyexp.douban_movie.model.MovieDetailModel" />
+        <mapping class="cn.flyexp.douban_movie.model.MovieDetailModel$RatingBean" />
+        <mapping class="cn.flyexp.douban_movie.model.MovieDetailModel$ImagesBean" />
+        <mapping class="cn.flyexp.douban_movie.model.MovieDetailModel$CastsBean" />
+        <mapping class="cn.flyexp.douban_movie.model.MovieDetailModel$CastsBean$AvatarsBean" />
+        <mapping class="cn.flyexp.douban_movie.model.MovieDetailModel$DirectorsBean" />
+        <mapping class="cn.flyexp.douban_movie.model.MovieDetailModel$DirectorsBean$AvatarsBeanX" />
+    </list>
+
+
+</litepal>

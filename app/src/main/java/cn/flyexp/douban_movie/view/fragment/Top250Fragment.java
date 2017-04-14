@@ -18,7 +18,7 @@ import butterknife.BindView;
 import cn.flyexp.douban_movie.R;
 import cn.flyexp.douban_movie.adapter.MovieAdapter;
 import cn.flyexp.douban_movie.base.BaseLazyFragment;
-import cn.flyexp.douban_movie.model.MovieModel;
+import cn.flyexp.douban_movie.model.MovieSubjectsModel;
 import cn.flyexp.douban_movie.presenter.Top250Presenter;
 import cn.flyexp.douban_movie.view.activity.MovieDetailActivity;
 import cn.flyexp.douban_movie.view.iview.ITop250View;
@@ -27,7 +27,7 @@ import cn.flyexp.douban_movie.view.iview.ITop250View;
 /**
  * Created by Won on 2016/5/4.
  */
-public class Top250Fragment extends BaseLazyFragment<ITop250View , Top250Presenter> implements ITop250View, View.OnClickListener, MovieAdapter.IOnItemClickListener {
+public class Top250Fragment extends BaseLazyFragment<ITop250View, Top250Presenter> implements ITop250View, View.OnClickListener, MovieAdapter.IOnItemClickListener {
 
     private static final String TAG = "Top250Fragment";
 
@@ -41,14 +41,14 @@ public class Top250Fragment extends BaseLazyFragment<ITop250View , Top250Present
     //判断是否第一次显示
     private boolean isFirst = true;
     //电影条目列表
-    private ArrayList<MovieModel.SubjectsBean> movieModelBeans = new ArrayList<>();
+    private ArrayList<MovieSubjectsModel> movieModelBeans = new ArrayList<>();
     //添加FooterView的适配器
     private HeaderAndFooterWrapper top250WrapperAdapter;
     //适配器
     private MovieAdapter top250Adapter;
     //footerView文字显示
     private TextView top250FooterViewInfo;
-    
+
     @Override
     protected Top250Presenter initPresenter() {
         return new Top250Presenter();
@@ -137,7 +137,7 @@ public class Top250Fragment extends BaseLazyFragment<ITop250View , Top250Present
     public void showComplete(ArrayList<?> modelBeans) {
         tvTip.setVisibility(View.GONE);
         srl.setRefreshing(false);
-        movieModelBeans.addAll((Collection<? extends MovieModel.SubjectsBean>) modelBeans);
+        movieModelBeans.addAll((Collection<? extends MovieSubjectsModel>) modelBeans);
         top250WrapperAdapter.notifyDataSetChanged();
     }
 
@@ -153,12 +153,13 @@ public class Top250Fragment extends BaseLazyFragment<ITop250View , Top250Present
     }
 
     @Override
-    public void onItemClick(String id, String img_url, String title) {
+    public void onItemClick(int position, String id, String img_url, String title) {
         Intent intent = new Intent(getContext(), MovieDetailActivity.class);
         intent.putExtra("id", id);
         intent.putExtra("theme", R.style.Top250ThemeTransNav);
         intent.putExtra("img_url", img_url);
         intent.putExtra("title", title);
+        intent.putExtra("movieSubject", movieModelBeans.get(position));
         intent.putExtra("color", getResources().getColor(R.color.colorTop250));
         startActivity(intent);
     }

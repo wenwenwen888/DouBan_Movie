@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
         toolbar.setBackgroundColor(color);
         navigationview.setBackgroundColor(color);
         user_link.setLinkTextColor(color);
-        intent = new Intent(this, SearchDetailActivity.class);
+        intent = new Intent();
         intent.putExtra("theme", styleid);
         intent.putExtra("color", color);
     }
@@ -177,6 +177,7 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
      */
     @Override
     public void OnSearchClick(String keyword) {
+        intent.setClass(this, SearchDetailActivity.class);
         intent.putExtra("keyword", keyword);
         startActivity(intent);
     }
@@ -208,11 +209,15 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
             case R.id.nav_exit: //退出
                 System.exit(0);
                 break;
+            case R.id.nav_favorite://收藏
+                intent.setClass(this, FavoriteActivity.class);
+                startActivity(intent);
+                break;
             default:
                 Snackbar.make(toolbar, item.getTitle(), Snackbar.LENGTH_SHORT).show();
-                drawerlayout.closeDrawers();
                 break;
         }
+        drawerlayout.closeDrawers();
         return true;
     }
 

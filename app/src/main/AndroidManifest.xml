@@ -22,7 +22,8 @@
         <activity android:name=".view.activity.SearchDetailActivity" />
         <activity android:name=".view.activity.MovieDetailActivity" />
         <activity android:name=".view.activity.PhotoActivity" />
-        <activity android:name=".view.activity.CelebrityDetailActivity"></activity>
+        <activity android:name=".view.activity.CelebrityDetailActivity" />
+        <activity android:name=".view.activity.FavoriteActivity"></activity>
     </application>
 
 </manifest>

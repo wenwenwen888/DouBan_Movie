@@ -8,11 +8,13 @@
     <string name="top250">Top250</string>
     <string name="tag">分类</string>
     <string name="favorite">收藏</string>
+    <string name="delete">删除</string>
     <string name="gift">福利</string>
     <string name="sun_mode">日间模式</string>
     <string name="night_mode">夜间模式</string>
     <string name="about">关于我</string>
     <string name="search">搜索</string>
+    <string name="check">选择</string>
     <string name="collection">收藏</string>
     <string name="exit">退出</string>
     <string name="search_title">搜索：%s</string>
@@ -22,7 +24,9 @@
     <string name="tag_year">年代 · · · · · ·</string>
     <string name="error_tips">网络出错，请重试</string>
     <string name="error_tips2">网络出错，点我重新加载</string>
+    <string name="error_tips3">查找不到此条目</string>
     <string name="empty_tips">查询不到数据，换个关键字试试</string>
+    <string name="favorite_empty_tips">暂时没有收藏的电影条目</string>
     <string name="loading_tips">正在拼命加载中...</string>
     <string name="no_data_tips">我是有底线(。・`ω´・)</string>
     <string name="director">导演：%s</string>
@@ -38,5 +42,9 @@
     <string name="more_works">浏览更多作品</string>
     <string name="detail_summary">\u3000\u3000%s</string>
     <string name="save">保存</string>
+    <string name="favorite_tip1">收藏出现错误 , 请重试</string>
+    <string name="favorite_tip2">取消收藏出现错误 , 请重试</string>
+    <string name="favorite_tip3">请等待加载完后再收藏</string>
+    <string name="unknown">未知</string>
 
 </resources>

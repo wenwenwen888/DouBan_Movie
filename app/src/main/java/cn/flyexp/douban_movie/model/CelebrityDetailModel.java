@@ -1,6 +1,10 @@
 package cn.flyexp.douban_movie.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
+
+import static android.R.attr.id;
 
 /**
  * Created by Won on 2017/4/9.
@@ -26,7 +30,8 @@ public class CelebrityDetailModel {
     private String name;
     private String gender;
     private AvatarsBean avatars;
-    private String id;
+    @SerializedName("id")
+    private String celebrity_id;
     private String name_en;
     private String born_place;
     private String alt;
@@ -67,11 +72,11 @@ public class CelebrityDetailModel {
     }
 
     public String getId() {
-        return id;
+        return celebrity_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String celebrity_id) {
+        this.celebrity_id = celebrity_id;
     }
 
     public String getName_en() {
@@ -164,14 +169,14 @@ public class CelebrityDetailModel {
          * subject : {"rating":{"max":10,"average":8.4,"stars":"45","min":0},"genres":["短片","脱口秀"],"title":"青年电影馆 第一季","casts":[{"alt":null,"avatars":null,"name":"周星驰 Stephen Chow","id":null},{"alt":null,"avatars":null,"name":"周润发 Yun-Fat Chow","id":null},{"alt":null,"avatars":null,"name":"李连杰 Jet Li","id":null}],"collect_count":204,"original_title":"青年电影馆 第一季","subtype":"tv","directors":[{"alt":null,"avatars":null,"name":"王先华","id":null}],"year":"2013","images":{"small":"https://img3.doubanio.com/view/movie_poster_cover/ipst/public/p2227932525.webp","large":"https://img3.doubanio.com/view/movie_poster_cover/lpst/public/p2227932525.webp","medium":"https://img3.doubanio.com/view/movie_poster_cover/spst/public/p2227932525.webp"},"alt":"https://movie.douban.com/subject/26292697/","id":"26292697"}
          */
 
-        private MovieModel.SubjectsBean subject;
+        private MovieSubjectsModel subject;
         private List<String> roles;
 
-        public MovieModel.SubjectsBean getSubject() {
+        public MovieSubjectsModel getSubject() {
             return subject;
         }
 
-        public void setSubject(MovieModel.SubjectsBean subject) {
+        public void setSubject(MovieSubjectsModel subject) {
             this.subject = subject;
         }
 

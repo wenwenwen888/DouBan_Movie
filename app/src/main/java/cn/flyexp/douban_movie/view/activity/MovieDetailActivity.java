@@ -20,14 +20,18 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.flyexp.douban_movie.MyApplication;
 import cn.flyexp.douban_movie.R;
 import cn.flyexp.douban_movie.adapter.MovieDetailAdapter;
 import cn.flyexp.douban_movie.base.BaseActivity;
 import cn.flyexp.douban_movie.model.MovieDetailModel;
+import cn.flyexp.douban_movie.model.MovieSubjectsModel;
 import cn.flyexp.douban_movie.presenter.MovieDetailPresenter;
 import cn.flyexp.douban_movie.view.iview.IMovieDetailView;
 
 public class MovieDetailActivity extends BaseActivity<IMovieDetailView, MovieDetailPresenter> implements IMovieDetailView, Toolbar.OnMenuItemClickListener, View.OnClickListener, MovieDetailAdapter.IOnItemClickListener {
+
+    private static final String TAG = "MovieDetailActivity";
 
     @BindView(R.id.iv_movie_detail)
     ImageView ivMovieDetail;
@@ -53,6 +57,11 @@ public class MovieDetailActivity extends BaseActivity<IMovieDetailView, MovieDet
     SwipeRefreshLayout srlMovieDetail;
     @BindView(R.id.ll_movie_detail)
     LinearLayout llMovieDetail;
+
+    //用于判断是否收藏过
+    private boolean isFavorite = false;
+    //电影条目
+    private MovieSubjectsModel movieSubjectsModel;
 
     @Override
     protected MovieDetailPresenter initPresenter() {
@@ -83,6 +92,8 @@ public class MovieDetailActivity extends BaseActivity<IMovieDetailView, MovieDet
         //配置RecyclerView
         initRecyclerView(rvMovieDetailDirector);
         initRecyclerView(rvMovieDetailCast);
+        //获取条目信息
+        movieSubjectsModel = (MovieSubjectsModel) getIntent().getSerializableExtra("movieSubject");
         //加载数据
         presenter.loadingData(getIntent().getStringExtra("id"));
     }
@@ -115,11 +126,49 @@ public class MovieDetailActivity extends BaseActivity<IMovieDetailView, MovieDet
     }
 
     /**
+     * 加载toolbar菜单布局后的方法
+     */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        //判断是否已收藏
+        if (presenter.isFavorite(getIntent().getStringExtra("id"))) {
+            menu.findItem(R.id.action_favorite).setIcon(R.drawable.ic_favorite_white_24dp);
+            isFavorite = true;
+        } else {
+            menu.findItem(R.id.action_favorite).setIcon(R.drawable.ic_favorite_border_white_24dp);
+            isFavorite = false;
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    /**
      * toolbar 菜单点击事件
      */
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        Toast.makeText(this, "收藏", Toast.LENGTH_SHORT).show();
+        if (srlMovieDetail.isRefreshing()) {
+            //正在加载时不许操作
+            Toast.makeText(this, getResources().getString(R.string.favorite_tip3), Toast.LENGTH_SHORT).show();
+        } else {
+            //判断是否已收藏
+            if (!isFavorite) {
+                //未收藏则插入数据
+                if (presenter.saveFavorite(movieSubjectsModel)) {
+                    item.setIcon(R.drawable.ic_favorite_white_24dp);
+                    isFavorite = true;
+                } else {
+                    Toast.makeText(this, getResources().getString(R.string.favorite_tip1), Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                //已收藏则删除数据
+                if (presenter.deleteFavorite(getIntent().getStringExtra("id"))) {
+                    item.setIcon(R.drawable.ic_favorite_border_white_24dp);
+                    isFavorite = false;
+                } else {
+                    Toast.makeText(this, getResources().getString(R.string.favorite_tip2), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
         return true;
     }
 
@@ -199,9 +248,13 @@ public class MovieDetailActivity extends BaseActivity<IMovieDetailView, MovieDet
     }
 
     @Override
-    public void showError() {
+    public void showError(boolean is404) {
         srlMovieDetail.setRefreshing(false);
-        Toast.makeText(this, getText(R.string.error_tips), Toast.LENGTH_SHORT).show();
+        if (is404) {
+            Toast.makeText(this, getText(R.string.error_tips3), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, getText(R.string.error_tips), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -212,6 +265,16 @@ public class MovieDetailActivity extends BaseActivity<IMovieDetailView, MovieDet
         intent.putExtra("title", name);
         intent.putExtra("color", getIntent().getIntExtra("color", getResources().getColor(R.color.colorMovie)));
         startActivity(intent);
+    }
+
+    @Override
+    public void finish() {
+        if (!isFavorite) {
+            Intent intent = new Intent();
+            intent.putExtra("isFavorite", isFavorite);
+            setResult(MyApplication.RESULTCODE, intent);
+        }
+        super.finish();
     }
 
 }
