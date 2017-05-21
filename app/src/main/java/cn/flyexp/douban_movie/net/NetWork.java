@@ -11,6 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetWork {
 
     private static DouBanApi douBanApi;
+    private static GankApi gankApi;
 
     public static DouBanApi getDouBanApi() {
         if (douBanApi == null) {
@@ -22,6 +23,18 @@ public class NetWork {
             douBanApi = retrofit.create(DouBanApi.class);
         }
         return douBanApi;
+    }
+
+    public static GankApi getGankApi() {
+        if (gankApi == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://gank.io/api/")
+                    .addConverterFactory(GsonConverterFactory.create())//使用工厂模式创建Gson的解析器
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .build();
+            gankApi = retrofit.create(GankApi.class);
+        }
+        return gankApi;
     }
 
 }

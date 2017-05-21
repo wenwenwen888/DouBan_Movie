@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -12,35 +12,41 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:textColorPrimary">@color/colorWhite</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent
+        </item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
         <!-- 使用自定义样式-->
         <item name="drawerArrowStyle">@style/AppTheme.MyDrawerArrowStyle</item>
+        <!-- Dialog使用自定义样式-->
+        <item name="alertDialogTheme">@style/AlertDialog</item>
     </style>
 
-    <style name="MovieTheme" parent="BaseTheme">
+    <style name="MovieThemeTransNav" parent="BaseTheme">
         <item name="colorPrimary">@color/colorMovie</item>
         <item name="colorPrimaryDark">@color/colorMovie</item>
         <item name="colorAccent">@color/colorMovie</item>
     </style>
 
-    <style name="AnimeTheme" parent="BaseTheme">
+    <style name="AnimeThemeTransNav" parent="BaseTheme">
         <item name="colorPrimary">@color/colorAnime</item>
         <item name="colorPrimaryDark">@color/colorAnime</item>
         <item name="colorAccent">@color/colorAnime</item>
     </style>
 
-    <style name="TVTheme" parent="BaseTheme">
+    <style name="TVThemeTransNav" parent="BaseTheme">
         <item name="colorPrimary">@color/colorTV</item>
         <item name="colorPrimaryDark">@color/colorTV</item>
         <item name="colorAccent">@color/colorTV</item>
     </style>
 
-    <style name="Top250Theme" parent="BaseTheme">
+    <style name="Top250ThemeTransNav" parent="BaseTheme">
         <item name="colorPrimary">@color/colorTop250</item>
         <item name="colorPrimaryDark">@color/colorTop250</item>
         <item name="colorAccent">@color/colorTop250</item>
     </style>
 
-    <style name="TagTheme" parent="BaseTheme">
+    <style name="TagThemeTransNav" parent="BaseTheme">
         <item name="colorPrimary">@color/colorTag</item>
         <item name="colorPrimaryDark">@color/colorTag</item>
         <item name="colorAccent">@color/colorTag</item>
@@ -52,14 +58,10 @@
         <item name="color">@color/colorWhite</item>
     </style>
 
-    <style name="MovieThemeTransNav" parent="MovieTheme" />
-
-    <style name="AnimeThemeTransNav" parent="AnimeTheme" />
-
-    <style name="TVThemeTransNav" parent="TVTheme" />
-
-    <style name="Top250ThemeTransNav" parent="Top250Theme" />
-
-    <style name="TagThemeTransNav" parent="TagTheme" />
+    <!-- Dialog使用自定义样式-->
+    <style name="AlertDialog" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColorPrimary">@color/colorMovieText1</item>
+        <item name="android:background">@color/colorWhite</item>
+    </style>
 
 </resources>

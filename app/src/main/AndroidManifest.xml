@@ -3,6 +3,8 @@
     package="cn.flyexp.douban_movie">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MyApplication"
@@ -23,7 +25,8 @@
         <activity android:name=".view.activity.MovieDetailActivity" />
         <activity android:name=".view.activity.PhotoActivity" />
         <activity android:name=".view.activity.CelebrityDetailActivity" />
-        <activity android:name=".view.activity.FavoriteActivity"></activity>
+        <activity android:name=".view.activity.FavoriteActivity" />
+        <activity android:name=".view.activity.GiftActivity"></activity>
     </application>
 
 </manifest>

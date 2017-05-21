@@ -213,6 +213,10 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
                 intent.setClass(this, FavoriteActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.nav_gift://福利
+                intent.setClass(this, GiftActivity.class);
+                startActivity(intent);
+                break;
             default:
                 Snackbar.make(toolbar, item.getTitle(), Snackbar.LENGTH_SHORT).show();
                 break;
