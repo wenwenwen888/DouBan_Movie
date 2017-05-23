@@ -1,5 +1,5 @@
 # 小瓣APP
-一个用于Android学习的项目，使用了豆瓣公开的api接口和一个代码家的http://gank.io 中的接口
+一个用于Android学习的项目，使用了豆瓣公开的api接口https://developers.douban.com/wiki/ 和一个代码家的http://gank.io 中的接口
 
 项目内使用了MVP + Rxjava + Retrofit2 + Material Design等开源库及相关控件开发.
 
