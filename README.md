@@ -9,7 +9,7 @@
 
 喜欢或觉得有用的就点个star呗 , 又不会怀孕(。・´ω´・)
 
-顺便下载到手机看看 ? 
+顺便下载到手机看看 ? (用浏览器扫描啦~)
 
 <img width="150" height=“150” src="https://github.com/wenwenwen888/DouBan_Movie/blob/master/preview/qcode.png"></img>
 
