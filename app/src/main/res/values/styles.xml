@@ -70,4 +70,9 @@
         <item name="android:background">@color/colorWhite</item>
     </style>
 
+    <!--Toolbar的高度-->
+    <style name="ToolbarHeight">
+        <item name="android:layout_height">?attr/actionBarSize</item>
+    </style>
+
 </resources>
