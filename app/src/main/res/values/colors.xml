@@ -5,6 +5,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorNight">#202020</color>
+    <color name="colorNightBg">#303030</color>
     <color name="colorMovie">#009688</color>
     <color name="colorAnime">#F7BACF</color>
     <color name="colorTV">#FE9700</color>

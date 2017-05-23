@@ -14,19 +14,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MovieThemeTransNav">
-        <activity android:name=".view.activity.MainActivity">
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.SearchDetailActivity" />
-        <activity android:name=".view.activity.MovieDetailActivity" />
-        <activity android:name=".view.activity.PhotoActivity" />
-        <activity android:name=".view.activity.CelebrityDetailActivity" />
-        <activity android:name=".view.activity.FavoriteActivity" />
-        <activity android:name=".view.activity.GiftActivity"></activity>
+        <activity
+            android:name=".view.activity.SearchDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.MovieDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.PhotoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.CelebrityDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.FavoriteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.GiftActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

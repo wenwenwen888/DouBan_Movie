@@ -2,6 +2,7 @@ package cn.flyexp.douban_movie.view.activity;
 
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.flyexp.douban_movie.MyApplication;
 import cn.flyexp.douban_movie.R;
 import cn.flyexp.douban_movie.adapter.MovieAdapter;
 import cn.flyexp.douban_movie.assistview.MyRecyclerView;
@@ -48,6 +50,8 @@ public class CelebrityDetailActivity extends BaseActivity<ICelebrityDetailView, 
     SwipeRefreshLayout srlCelebrityDetail;
     @BindView(R.id.ll_celebrity_detail)
     LinearLayout llCelebrityDetail;
+    @BindView(R.id.card_view)
+    CardView cardView;
 
     private String avatars_large;
     //电影条目列表
@@ -75,6 +79,8 @@ public class CelebrityDetailActivity extends BaseActivity<ICelebrityDetailView, 
         srlCelebrityDetail.setEnabled(false);
         srlCelebrityDetail.setColorSchemeColors(getIntent().getIntExtra("color", getResources().getColor(R.color.colorMovie)));
 
+        checkIsNightMode();
+
         //配置RecyclerView
         rvWorks.setLayoutManager(new LinearLayoutManager(this));//设置list列风格
         //解决嵌套滑动冲突
@@ -84,6 +90,16 @@ public class CelebrityDetailActivity extends BaseActivity<ICelebrityDetailView, 
 
         //加载数据
         presenter.loadingData(getIntent().getStringExtra("id"));
+    }
+
+    private void checkIsNightMode() {
+        if (MyApplication.NIGHT_MODE) {
+            srlCelebrityDetail.setColorSchemeColors(getResources().getColor(R.color.colorNight));
+            cardView.setBackgroundColor(getResources().getColor(R.color.colorNight));
+            tvCelebrityName.setTextColor(getResources().getColor(R.color.colorWhite));
+            tvCelebrityPlace.setTextColor(getResources().getColor(R.color.colorWhite));
+            tvCelebrityRoles.setTextColor(getResources().getColor(R.color.colorWhite));
+        }
     }
 
     @OnClick({R.id.iv_celebrity_avatar, R.id.tv_celebrity_more})
@@ -158,7 +174,11 @@ public class CelebrityDetailActivity extends BaseActivity<ICelebrityDetailView, 
         rvWorks.setAdapter(worksAdapter);
         worksAdapter.setOnItemClickListener(this);
         //更多作品
-        tvCelebrityMore.setBackgroundColor(getIntent().getIntExtra("color", getResources().getColor(R.color.colorMovie)));
+        if (MyApplication.NIGHT_MODE) {
+            tvCelebrityMore.setBackgroundColor(getResources().getColor(R.color.colorNight));
+        } else {
+            tvCelebrityMore.setBackgroundColor(getIntent().getIntExtra("color", getResources().getColor(R.color.colorMovie)));
+        }
     }
 
     @Override

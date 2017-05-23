@@ -1,6 +1,10 @@
 package cn.flyexp.douban_movie.view.fragment;
 
 import android.content.Intent;
+import android.widget.LinearLayout;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import cn.flyexp.douban_movie.R;
@@ -9,6 +13,7 @@ import cn.flyexp.douban_movie.assistview.FullyGridLayoutManager;
 import cn.flyexp.douban_movie.assistview.MyRecyclerView;
 import cn.flyexp.douban_movie.assistview.SpaceItemDecoration;
 import cn.flyexp.douban_movie.base.LazyFragment;
+import cn.flyexp.douban_movie.model.MessageEvent;
 import cn.flyexp.douban_movie.model.TagData;
 import cn.flyexp.douban_movie.view.activity.SearchDetailActivity;
 
@@ -27,6 +32,8 @@ public class TagFragment extends LazyFragment implements TagAdapter.IOnItemClick
     MyRecyclerView rvArtist;
     @BindView(R.id.rv_year)
     MyRecyclerView rvYear;
+    @BindView(R.id.ll_tag)
+    LinearLayout llTag;
 
     @Override
     protected int setLayoutId() {
@@ -63,6 +70,15 @@ public class TagFragment extends LazyFragment implements TagAdapter.IOnItemClick
         //显示数据
         if (isPrepared && isVisible) {
 
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        if (event.isNight) {
+            llTag.setBackgroundColor(getResources().getColor(R.color.colorNightBg));
+        } else {
+            llTag.setBackgroundColor(getResources().getColor(R.color.colorWhite));
         }
     }
 

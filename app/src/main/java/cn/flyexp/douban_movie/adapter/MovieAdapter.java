@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.flyexp.douban_movie.MyApplication;
 import cn.flyexp.douban_movie.R;
 import cn.flyexp.douban_movie.model.MovieSubjectsModel;
 
@@ -50,6 +52,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         Context context = holder.itemView.getContext();
         final MovieSubjectsModel subjectsBean = movieModel.get(position);
+        if (MyApplication.NIGHT_MODE) {
+            holder.llItem.setBackgroundColor(context.getResources().getColor(R.color.colorNight));
+            holder.tvMovieTitle.setTextColor(context.getResources().getColor(R.color.colorWhite));
+        } else {
+            holder.llItem.setBackgroundColor(context.getResources().getColor(R.color.colorWhite));
+            holder.tvMovieTitle.setTextColor(context.getResources().getColor(R.color.colorMovieText1));
+        }
         if (isCheck) {
             holder.checkbox.setVisibility(View.VISIBLE);
             if (selectPositions.contains(position)) {    //判断是否已经选择
@@ -145,7 +154,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
      */
     public ArrayList<String> getSelectIds() {
         ArrayList<String> selectIds = new ArrayList<>();
-        for (Integer i : selectPositions){
+        for (Integer i : selectPositions) {
             selectIds.add(movieModel.get(i).getMovie_id());
         }
         return selectIds;
@@ -156,7 +165,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
      */
     public ArrayList<MovieSubjectsModel> getSelectModels() {
         ArrayList<MovieSubjectsModel> selectModels = new ArrayList<>();
-        for (Integer i : selectPositions){
+        for (Integer i : selectPositions) {
             selectModels.add(movieModel.get(i));
         }
         return selectModels;
@@ -164,6 +173,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.ll_item)
+        LinearLayout llItem;
         @BindView(R.id.checkbox)
         AppCompatCheckBox checkbox;
         @BindView(R.id.img_movie)

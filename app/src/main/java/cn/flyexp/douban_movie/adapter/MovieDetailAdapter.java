@@ -1,5 +1,7 @@
 package cn.flyexp.douban_movie.adapter;
 
+import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.flyexp.douban_movie.MyApplication;
 import cn.flyexp.douban_movie.R;
 
 /**
@@ -40,14 +43,18 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
+        Context context = holder.itemView.getContext();
+        if (MyApplication.NIGHT_MODE) {
+            holder.cardView.setBackgroundColor(context.getResources().getColor(R.color.colorNight));
+        }
         //设置头像
-        Glide.with(holder.itemView.getContext()).load(imgs.get(position)).into(holder.ivMovieDetailItem);
+        Glide.with(context).load(imgs.get(position)).into(holder.ivMovieDetailItem);
         //设置名字
         holder.tvMovieDetailItem.setText(names.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mOnItemClickListener.onItemClick(ids.get(holder.getAdapterPosition()) , names.get(holder.getAdapterPosition()));
+                mOnItemClickListener.onItemClick(ids.get(holder.getAdapterPosition()), names.get(holder.getAdapterPosition()));
             }
         });
     }
@@ -59,6 +66,8 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.card_view)
+        CardView cardView;
         @BindView(R.id.iv_movie_detail_item)
         ImageView ivMovieDetailItem;
         @BindView(R.id.tv_movie_detail_item)
@@ -77,7 +86,7 @@ public class MovieDetailAdapter extends RecyclerView.Adapter<MovieDetailAdapter.
     }
 
     public interface IOnItemClickListener {
-        void onItemClick(String id , String name);
+        void onItemClick(String id, String name);
     }
 
 }

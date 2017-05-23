@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.aitangba.swipeback.SwipeBackActivity;
 
 import butterknife.ButterKnife;
+import cn.flyexp.douban_movie.MyApplication;
 import cn.flyexp.douban_movie.R;
 
 /**
@@ -17,13 +18,21 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends SwipeB
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(getIntent().getIntExtra("theme", R.style.MovieThemeTransNav));
+        if (MyApplication.NIGHT_MODE) {
+            setTheme(R.style.NightThemeTransNav);
+        } else {
+            setTheme(getIntent().getIntExtra("theme", R.style.MovieThemeTransNav));
+        }
         super.onCreate(savedInstanceState);
         setContentView(setLayoutId());
         ButterKnife.bind(this);
         presenter = initPresenter();
         presenter.attach((V) this);
         initView();
+        //夜间模式颜色
+        if (MyApplication.NIGHT_MODE) {
+            findViewById(R.id.root_view).setBackgroundColor(getResources().getColor(R.color.colorNightBg));
+        }
     }
 
     @Override

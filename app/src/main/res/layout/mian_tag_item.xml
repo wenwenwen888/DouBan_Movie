@@ -4,14 +4,17 @@
     android:layout_height="wrap_content"
     android:padding="2dp">
 
-    <Button
+    <TextView
         android:id="@+id/bt_main_tag_item"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_tag_selector"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:text="王家卫"
         android:textColor="@color/colorWhite"
         android:textSize="14sp" />
 

@@ -14,6 +14,9 @@ public class MyApplication extends LitePalApplication {
 
     public static int RESULTCODE = 0x01;
 
+    //是否夜间模式
+    public static boolean NIGHT_MODE = false;
+
     @Override
     public void onCreate() {
         super.onCreate();

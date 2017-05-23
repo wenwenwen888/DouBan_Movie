@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,18 +19,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 import com.wyt.searchbox.SearchFragment;
 import com.wyt.searchbox.custom.IOnSearchClickListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.flyexp.douban_movie.MyApplication;
 import cn.flyexp.douban_movie.R;
 import cn.flyexp.douban_movie.adapter.FragmentAdapter;
 import cn.flyexp.douban_movie.assistview.NoScrollViewPager;
+import cn.flyexp.douban_movie.model.MessageEvent;
 import cn.flyexp.douban_movie.view.fragment.AnimeFragment;
 import cn.flyexp.douban_movie.view.fragment.MovieFragment;
 import cn.flyexp.douban_movie.view.fragment.TVFragment;
@@ -39,7 +43,7 @@ import cn.flyexp.douban_movie.view.fragment.TagFragment;
 import cn.flyexp.douban_movie.view.fragment.Top250Fragment;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity implements OnTabSelectListener, IOnSearchClickListener, View.OnClickListener, Toolbar.OnMenuItemClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements OnTabSelectListener, IOnSearchClickListener, View.OnClickListener, Toolbar.OnMenuItemClickListener, NavigationView.OnNavigationItemSelectedListener, OnTabReselectListener {
 
     private static final String TAG = "MainActivity";
 
@@ -63,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
 
     private SearchFragment searchFragment;  //搜索框
     private Intent intent;
+
+    //当前tab页面
+    private int tabAtPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,12 +95,12 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
         user_link = (TextView) headerLayout.findViewById(R.id.user_link);
         user_icon = (CircleImageView) headerLayout.findViewById(R.id.user_icon);
         //头像点击
-        user_icon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "头像", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        user_icon.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(MainActivity.this, "头像", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         //初始化Adapter
         fragments.add(new MovieFragment());
@@ -106,8 +113,6 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
         viewpager.setNoScroll(true);//viewpager禁止滑动
         viewpager.setOffscreenPageLimit(5);//默认加载5页
         viewpager.setAdapter(fragmentAdapter);
-        viewpager.addOnPageChangeListener(new TabOnPageChangeListener());
-
 
         //监听drawerLayout , 改变导航图标
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerlayout, toolbar, R.string.app_name, R.string.app_name);
@@ -122,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
         toolbar.setOnMenuItemClickListener(this);//添加子菜单点击事件
         navigationview.setNavigationItemSelectedListener(this);//右侧抽屉导航子菜单选择事件
         bottomBar.setOnTabSelectListener(this); //底部导航选择事件
+        bottomBar.setOnTabReselectListener(this);
     }
 
     /**
@@ -139,6 +145,15 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
      */
     @Override
     public void onTabSelected(@IdRes int tabId) {
+        selectBottomId(tabId);
+    }
+
+    @Override
+    public void onTabReSelected(@IdRes int tabId) {
+        selectBottomId(tabId);
+    }
+
+    private void selectBottomId(int tabId) {
         switch (tabId) {
             case R.id.tab_movie://电影
                 setTitleAndColor(0, getResources().getString(R.string.movie), getResources().getColor(R.color.colorMovie), R.style.MovieThemeTransNav);
@@ -162,6 +177,11 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
      * 设置title和主题颜色
      */
     private void setTitleAndColor(int item, String title, int color, int styleid) {
+        tabAtPosition = item;
+        if (MyApplication.NIGHT_MODE) {
+            color = getResources().getColor(R.color.colorNight);
+            styleid = R.style.NightThemeTransNav;
+        }
         viewpager.setCurrentItem(item, false);
         toolbar.setTitle(title);
         toolbar.setBackgroundColor(color);
@@ -217,6 +237,12 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
                 intent.setClass(this, GiftActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.nav_sun_mode://日间模式
+                setDayNightMode(false);
+                break;
+            case R.id.nav_night_mode://夜间模式
+                setDayNightMode(true);
+                break;
             default:
                 Snackbar.make(toolbar, item.getTitle(), Snackbar.LENGTH_SHORT).show();
                 break;
@@ -226,23 +252,21 @@ public class MainActivity extends AppCompatActivity implements OnTabSelectListen
     }
 
     /**
-     * 功能：Fragment页面改变事件
+     * 设置夜间模式
+     *
+     * @param isNight 是否夜间模式
      */
-    public class TabOnPageChangeListener implements ViewPager.OnPageChangeListener {
-
-        //当滑动状态改变时调用
-        public void onPageScrollStateChanged(int state) {
-
+    private void setDayNightMode(boolean isNight) {
+        if (isNight) {
+            bottomBar.setItems(R.xml.bottombar_night_tabs);
+            viewpager.setBackgroundColor(getResources().getColor(R.color.colorNightBg));
+        } else {
+            bottomBar.setItems(R.xml.bottombar_tabs);
+            viewpager.setBackgroundColor(getResources().getColor(R.color.colorWhite));
         }
-
-        //当前页面被滑动时调用
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
-
-        //当新的页面被选中时调用
-        public void onPageSelected(int position) {
-
-        }
+        MyApplication.NIGHT_MODE = isNight;
+        bottomBar.selectTabAtPosition(tabAtPosition);
+        EventBus.getDefault().post(new MessageEvent(isNight));
     }
 
     /**

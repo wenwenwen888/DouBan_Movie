@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import butterknife.BindView;
+import cn.flyexp.douban_movie.MyApplication;
 import cn.flyexp.douban_movie.R;
 import cn.flyexp.douban_movie.adapter.MovieAdapter;
 import cn.flyexp.douban_movie.base.BaseActivity;
@@ -99,6 +100,8 @@ public class SearchDetailActivity extends BaseActivity<ISearchDetailView, Search
         //监听点击提示文本
         tvTip.setOnClickListener(this);
 
+        checkIsNightMode();
+
         //实例化搜索框
         searchFragment = SearchFragment.newInstance();
         searchFragment.setOnSearchClickListener(this);//搜索监听事件
@@ -106,6 +109,13 @@ public class SearchDetailActivity extends BaseActivity<ISearchDetailView, Search
         tbSearchDetail.setNavigationOnClickListener(this);
         //加载数据
         presenter.search(keyword, isTag, true);
+    }
+
+    private void checkIsNightMode() {
+        if (MyApplication.NIGHT_MODE) {
+            tbSearchDetail.setBackgroundColor(getResources().getColor(R.color.colorNight));
+            srl.setColorSchemeColors(getResources().getColor(R.color.colorNight));
+        }
     }
 
     /**

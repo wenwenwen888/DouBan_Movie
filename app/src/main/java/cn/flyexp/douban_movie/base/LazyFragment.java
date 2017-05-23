@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
 
 /**
@@ -26,6 +28,8 @@ public abstract class LazyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(setLayoutId(), container, false);
         ButterKnife.bind(this, view);
+
+        EventBus.getDefault().register(this);
 
         initView();
         isPrepared = true;
@@ -54,4 +58,9 @@ public abstract class LazyFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

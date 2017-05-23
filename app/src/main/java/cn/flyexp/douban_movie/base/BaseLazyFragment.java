@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
 
 /**
@@ -27,6 +29,8 @@ public abstract class BaseLazyFragment<V, T extends BasePresenter<V>> extends Fr
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(setLayoutId(), container, false);
         ButterKnife.bind(this, view);
+
+        EventBus.getDefault().register(this);
 
         presenter = initPresenter();
         presenter.attach(getContext(), (V) this);
@@ -64,6 +68,7 @@ public abstract class BaseLazyFragment<V, T extends BasePresenter<V>> extends Fr
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        EventBus.getDefault().unregister(this);
         presenter.dettach();
         presenter.onDestroy();
     }

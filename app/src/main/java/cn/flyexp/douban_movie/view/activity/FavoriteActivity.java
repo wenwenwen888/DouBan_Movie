@@ -211,4 +211,5 @@ public class FavoriteActivity extends BaseActivity<IFavoriteView, FavoritePresen
             favoriteWrapperAdapter.notifyDataSetChanged();
         }
     }
+
 }

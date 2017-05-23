@@ -11,6 +11,9 @@ import android.widget.Toast;
 
 import com.zhy.adapter.recyclerview.wrapper.HeaderAndFooterWrapper;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -18,6 +21,7 @@ import butterknife.BindView;
 import cn.flyexp.douban_movie.R;
 import cn.flyexp.douban_movie.adapter.MovieAdapter;
 import cn.flyexp.douban_movie.base.BaseLazyFragment;
+import cn.flyexp.douban_movie.model.MessageEvent;
 import cn.flyexp.douban_movie.model.MovieSubjectsModel;
 import cn.flyexp.douban_movie.presenter.TVPresenter;
 import cn.flyexp.douban_movie.view.activity.MovieDetailActivity;
@@ -92,6 +96,16 @@ public class TVFragment extends BaseLazyFragment<ITVView, TVPresenter> implement
             //加载数据
             presenter.loadingData();
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        if (event.isNight) {
+            srl.setColorSchemeResources(R.color.colorNight);
+        } else {
+            srl.setColorSchemeResources(R.color.colorTV);
+        }
+        tvWrapperAdapter.notifyDataSetChanged();
     }
 
     /**

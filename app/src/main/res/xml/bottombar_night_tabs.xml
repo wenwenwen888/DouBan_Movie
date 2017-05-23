@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        barColorWhenSelected="@color/colorNight"
+        icon="@drawable/ic_movie_black_24dp"
+        id="@+id/tab_movie"
+        title="@string/movie" />
+    <tab
+        barColorWhenSelected="@color/colorNight"
+        icon="@drawable/ic_anime_black_24dp"
+        id="@+id/tab_anime"
+        title="@string/anime" />
+    <tab
+        barColorWhenSelected="@color/colorNight"
+        icon="@drawable/ic_tv_black_24dp"
+        id="@+id/tab_tv"
+        title="@string/tv" />
+    <tab
+        barColorWhenSelected="@color/colorNight"
+        icon="@drawable/ic_hot_black_24dp"
+        id="@+id/tab_top250"
+        title="@string/top250" />
+    <tab
+        barColorWhenSelected="@color/colorNight"
+        icon="@drawable/ic_tag_black_24dp"
+        id="@+id/tab_tag"
+        title="@string/tag" />
+</tabs>

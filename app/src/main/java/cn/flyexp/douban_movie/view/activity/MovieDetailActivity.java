@@ -86,6 +86,8 @@ public class MovieDetailActivity extends BaseActivity<IMovieDetailView, MovieDet
         srlMovieDetail.setEnabled(false);
         srlMovieDetail.setColorSchemeColors(getIntent().getIntExtra("color", getResources().getColor(R.color.colorMovie)));
 
+        checkIsNightMode();
+
         toolbarMovieDetail.setOnMenuItemClickListener(this);//子菜单点击事件 , 即点赞
         toolbarMovieDetail.setNavigationOnClickListener(this);//导航点击事件 , 即返回
 
@@ -96,6 +98,16 @@ public class MovieDetailActivity extends BaseActivity<IMovieDetailView, MovieDet
         movieSubjectsModel = (MovieSubjectsModel) getIntent().getSerializableExtra("movieSubject");
         //加载数据
         presenter.loadingData(getIntent().getStringExtra("id"));
+    }
+
+    private void checkIsNightMode() {
+        if (MyApplication.NIGHT_MODE) {
+            srlMovieDetail.setColorSchemeColors(getResources().getColor(R.color.colorNight));
+            tvMovieDetailYear.setTextColor(getResources().getColor(R.color.color999));
+            tvMovieDetailCountry.setTextColor(getResources().getColor(R.color.color999));
+            tvMovieDetailType.setTextColor(getResources().getColor(R.color.color999));
+            tvMovieDetailSummary.setTextColor(getResources().getColor(R.color.color999));
+        }
     }
 
     @OnClick(R.id.iv_movie_detail)

@@ -22,6 +22,12 @@
         <item name="alertDialogTheme">@style/AlertDialog</item>
     </style>
 
+    <style name="NightThemeTransNav" parent="BaseTheme">
+        <item name="colorPrimary">@color/colorNight</item>
+        <item name="colorPrimaryDark">@color/colorNight</item>
+        <item name="colorAccent">@color/colorNight</item>
+    </style>
+
     <style name="MovieThemeTransNav" parent="BaseTheme">
         <item name="colorPrimary">@color/colorMovie</item>
         <item name="colorPrimaryDark">@color/colorMovie</item>
