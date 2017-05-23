@@ -1,11 +1,19 @@
 # 小瓣APP
-一个用于Android学习的项目，使用了豆瓣公开的api接口和一个代码家的http://gank.io 中的接口, 项目内使用了MVP + Rxjava + Retrofit2 + Material Design等开源库及相关控件开发.
+一个用于Android学习的项目，使用了豆瓣公开的api接口和一个代码家的http://gank.io 中的接口
+
+项目内使用了MVP + Rxjava + Retrofit2 + Material Design等开源库及相关控件开发.
 
 因为不知道叫什么名字 , 所以就随便起了个名字叫「小瓣」了. 
 
 纯属个人学习项目 , 仅供参考 , 如有侵权 , 联系即删 . 
 
-Screenshots
+喜欢或觉得有用的就点个star呗 , 又不会怀孕(。・´ω´・)
+
+顺便下载到手机看看 ? 
+
+<img width="150" height=“150” src="https://github.com/wenwenwen888/DouBan_Movie/blob/master/preview/qcode.png"></img>
+
+一些截图
 --------
 
 <img width="280" height=“400” src="https://github.com/wenwenwen888/DouBan_Movie/blob/master/preview/movie.png"></img>
@@ -20,7 +28,7 @@ Screenshots
 <img width="280" height=“400” src="https://github.com/wenwenwen888/DouBan_Movie/blob/master/preview/gift.png"></img>
 <img width="280" height=“400” src="https://github.com/wenwenwen888/DouBan_Movie/blob/master/preview/night.png"></img>
 
-thanks
+感谢开源
 --------
 
 - [Google](https://developer.android.google.cn/index.html)
@@ -37,5 +45,5 @@ thanks
 - [LitePal数据库](https://github.com/LitePalFramework/LitePal)
 - [EventBus](https://github.com/greenrobot/EventBus)
 
-End (。・`ω´・)
+完 (。・`ω´・)
 --------
